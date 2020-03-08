@@ -34,6 +34,10 @@ public class CakeView extends SurfaceView {
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
 
+    public CakeModel getCake() {
+        return cake;
+    }
+
     private CakeModel cake;
 
     /**
@@ -79,20 +83,23 @@ public class CakeView extends SurfaceView {
     public void drawCandle(Canvas canvas, float left, float bottom) {
         canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
 
-        //draw the outer flame
-        float flameCenterX = left + candleWidth/2;
-        float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
+        if (cake.candleLit) {
 
-        //draw the inner flame
-        flameCenterY += outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+            //draw the outer flame
+            float flameCenterX = left + candleWidth / 2;
+            float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius / 3;
+            canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
+
+            //draw the inner flame
+            flameCenterY += outerFlameRadius / 3;
+            canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+
+        }
 
         //draw the wick
         float wickLeft = left + candleWidth/2 - wickWidth/2;
         float wickTop = bottom - wickHeight - candleHeight;
         canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
-
     }
 
     /**
@@ -105,7 +112,6 @@ public class CakeView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas)
     {
-        //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
 
@@ -127,10 +133,28 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        //Now a candle in the center
-        drawCandle(canvas, cakeLeft + cakeWidth/2 - candleWidth/2, cakeTop);
-        drawCandle(canvas, cakeLeft + cakeWidth/4 - candleWidth/2, cakeTop);
+        if (cake.ifCakeCandles) {
+            //Now a candle in the center
 
+            int num = cake.candleCount;
+
+            for (int i = 1; i <= num; i++) {
+                drawCandle(canvas,  cakeLeft + (cakeWidth / num)*i - candleWidth / num - 50, cakeTop);
+            }
+
+
+        }
+        if (cake.balloonCoordinates[0] != -1f)
+        {
+            Paint balloonStringPaint = new Paint();
+            balloonStringPaint.setColor(0);
+            canvas.drawRect(cake.balloonCoordinates[0],cake.balloonCoordinates[1] - 200,cake.balloonCoordinates[0]+5,cake.balloonCoordinates[1],balloonStringPaint);
+            //canvas.drawOval(cake.balloonCoordinates[0] - 90,cake.balloonCoordinates[1] - 400,cake.balloonCoordinates[0] + 90,cake.balloonCoordinates[1] - 200,balloonPaint);
+        }
+
+        Paint textpaint = new Paint();
+        textpaint.setColor(200);
+        canvas.drawText(String.format("%.0f,%.0f", cake.xpos ,cake.ypos),40, 440, textpaint);
     }//onDraw
 
 }//class CakeView
