@@ -19,8 +19,8 @@ public class CakeController implements  View.OnClickListener, CompoundButton.OnC
     }
 
     public boolean onTouch(View v, MotionEvent event){
-        float x = event.getY();
-        float y = event.getX();
+        float x = event.getX();
+        float y = event.getY();
         modelCake.balloonCoordinates[0] = x;
         modelCake.balloonCoordinates[1] = y;
         modelCake.xpos = event.getX();
