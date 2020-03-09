@@ -114,7 +114,7 @@
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/blow_out" />
+                android:text= "Extinguish" />
 
             <Button
                 android:id="@+id/button"
