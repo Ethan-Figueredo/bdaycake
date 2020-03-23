@@ -18,7 +18,7 @@ public class CakeView extends SurfaceView {
     Paint wickPaint = new Paint();
     Paint textpaint = new Paint();
 
-    public float xpos;
+    public float xPos;
     public float ypos;
 
     /* These constants define the dimensions of the cake.  While defining constants for things
@@ -152,7 +152,7 @@ public class CakeView extends SurfaceView {
 
         textpaint.setColor(Color.RED);
         textpaint.setTextSize(30);
-        canvas.drawText(String.format("%.0f,%.0f", cake.xpos, cake.ypos),40, 440, textpaint);
+        canvas.drawText(String.format("%.0f,%.0f", cake.xPos, cake.ypos),40, 440, textpaint);
     }//onDraw
 
 }//class CakeView

@@ -23,7 +23,7 @@ public class CakeController implements  View.OnClickListener, CompoundButton.OnC
         float y = event.getY();
         modelCake.balloonCoordinates[0] = x;
         modelCake.balloonCoordinates[1] = y;
-        modelCake.xpos = event.getX();
+        modelCake.xPos = event.getX();
         modelCake.ypos = event.getY();
         viewCake.invalidate();
         return true;

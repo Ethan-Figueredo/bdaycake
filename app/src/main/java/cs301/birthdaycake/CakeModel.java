@@ -7,7 +7,7 @@ public class CakeModel {
     public boolean ifCakeCandles = true;
     public float[] balloonCoordinates = new float[]{-1f,-1f};
 
-    float xpos;
+    float xPos;
     float ypos;
     /**
      *Constructor
